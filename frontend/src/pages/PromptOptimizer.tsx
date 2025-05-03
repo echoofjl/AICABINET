@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { optimizePrompt } from "../services/promptService"; 
+import { optimizePrompt } from "../services/promptService";
 import PromptInput from "../components/PromptInput";
 import PromptOutput from "../components/PromptOutput";
+import PromptWizard from "../components/PromptWizard";
 
 const PromptOptimizer = () => {
   const [input, setInput] = useState("");
@@ -9,15 +10,16 @@ const PromptOptimizer = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [copied, setCopied] = useState(false);
+  const [useWizard, setUseWizard] = useState(false);
 
-  const handleOptimize = async () => {
+  const handleOptimize = async (isRetry = false) => {
     if (!input.trim()) return;
     setLoading(true);
     setError("");
     setCopied(false);
 
     try {
-      const optimized = await optimizePrompt(input);
+      const optimized = await optimizePrompt(input, isRetry);
       setOutput(optimized);
     } catch (e) {
       console.error("Error optimizing prompt:", e);
@@ -37,19 +39,34 @@ const PromptOptimizer = () => {
     }
   };
 
+
   return (
-    <div className="max-w-3xl mx-auto p-6 space-y-4">
-      <h1 className="text-2xl font-bold">Prompt Optimizer</h1>
-      <p className="text-gray-600">Rewrite and enhance your prompt for better AI responses.</p>
+    <div className="max-w-3xl mx-auto p-6 space-y-6">
+      <div className="flex justify-between items-center">
+        <h1 className="text-2xl font-bold">Prompt Optimizer</h1>
+        <button
+          className="text-sm underline text-blue-600"
+          onClick={() => setUseWizard(!useWizard)}
+        >
+          {useWizard ? "Switch to Manual Mode" : "Use Interactive Wizard"}
+        </button>
+      </div>
 
-      <PromptInput value={input} onChange={setInput} onSubmit={handleOptimize} loading={loading} output={output}/>
+      {useWizard ? (
+        <PromptWizard/>
+      ) : (
+        <div>
+          <PromptInput value={input} onChange={setInput} onSubmit={handleOptimize} loading={loading} output={output} />
 
-      {error && <div className="text-red-600">{error}</div>}
+          {error && <div className="text-red-600">{error}</div>}
 
-      {output && (
-        <PromptOutput content={output} copied={copied} onCopy={handleCopy} />
-      )}
-    </div>
+          {output && (
+            <PromptOutput content={output} copied={copied} onCopy={handleCopy} />
+          )}
+        </div>
+      )
+      }
+    </div >
   );
 };
 

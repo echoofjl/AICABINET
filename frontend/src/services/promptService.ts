@@ -1,8 +1,11 @@
-export const optimizePrompt = async (prompt: string): Promise<string> => {
+export const optimizePrompt = async (prompt: string, isRetry: boolean): Promise<string> => {
     const res = await fetch("/api/optimize", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ prompt }),
+      body: JSON.stringify({ 
+        prompt: prompt, 
+        variation: isRetry
+       }),
     });
   
     const data = await res.json();

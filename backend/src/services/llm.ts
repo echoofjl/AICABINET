@@ -1,20 +1,29 @@
 import OpenAI from "openai";
 
 const openai = new OpenAI({
-    apiKey: process.env.DASHSCOPE_API_KEY, 
+    apiKey: process.env.DASHSCOPE_API_KEY,
     baseURL: "https://dashscope.aliyuncs.com/compatible-mode/v1"
 });
 
-const SYSTEM_PROMPT = '你是一个提示词优化助手，请优化以下提示词：';
 
-export async function callLLM(prompt: string): Promise<string> {
+export async function callLLM(prompt: string, variation?: string): Promise<string> {
     try {
         const completion = await openai.chat.completions.create({
-            model: "qwen-plus", 
+            model: "qwen-plus",
             messages: [
-                { role: "system", content: SYSTEM_PROMPT },
-                { role: "user", content: prompt }
-            ]
+                {
+                  role: "system",
+                  content: `You are a prompt optimization assistant. Improve the following prompt to make it clearer and more effective. ${
+                    variation ? `This is a variation attempt: ${variation}. Try to make it different.` : ""
+                  }`,
+                },
+                {
+                  role: "user",
+                  content: prompt,
+                },
+              ],
+              temperature: 0.8,
+              top_p: 0.95,
         });
         return JSON.stringify(completion);
     } catch (error) {
