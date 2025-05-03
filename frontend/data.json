@@ -1,0 +1,26 @@
+{
+    "choices": [
+        {
+            "message": {
+                "role": "assistant",
+                "content": "优化后的提示词：请提供一份详细指南，包括构思、结构、角色设定、情节发展等方面，指导如何从零开始创作一本小说。"
+            },
+            "finish_reason": "stop",
+            "index": 0,
+            "logprobs": null
+        }
+    ],
+    "object": "chat.completion",
+    "usage": {
+        "prompt_tokens": 29,
+        "completion_tokens": 32,
+        "total_tokens": 61,
+        "prompt_tokens_details": {
+            "cached_tokens": 0
+        }
+    },
+    "created": 1746099701,
+    "system_fingerprint": null,
+    "model": "qwen-plus",
+    "id": "chatcmpl-05b20b66-9f36-9037-9f4e-9a212ef0ecbe"
+}
