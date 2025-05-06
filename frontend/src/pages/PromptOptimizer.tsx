@@ -1,6 +1,6 @@
 import { useState } from "react";
-import PromptManager from "../components/PromptManager";
-import PromptWizard from "../components/PromptWizard";
+import PromptManager from "../components/ui/PromptManager";
+import PromptWizard from "../components/ui/PromptWizard";
 
 const PromptOptimizer = () => {
   const [useWizard, setUseWizard] = useState(false);

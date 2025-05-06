@@ -1,5 +1,5 @@
 import { useState } from "react";
-import usePromptOptimization from "../hooks/usePromptOptimization";
+import usePromptOptimization from "../../hooks/usePromptOptimization";
 import { PromptInput, PromptOutput, PromptSectionWrapper } from "./PromptInputOutput";
 
 type Props = {
