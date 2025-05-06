@@ -1,17 +1,21 @@
 import { useState } from "react";
 import PromptManager from "./PromptManager";
+import { PromptSectionWrapper } from "./PromptInputOutput";
 
 const PromptWizard = () => {
     const [step, setStep] = useState(0);
     const [goal, setGoal] = useState("");
-    const [platform, setPlatform] = useState("");
-    const [tone, setTone] = useState("");
+    const [context, setContext] = useState("");
+    const [audience, setAudience] = useState("");
+    const [format, setFormat] = useState("");
     const [constraints, setConstraints] = useState("");
+    const [tone, setTone] = useState("");
+    const [example, setExample] = useState("");
     const [finalPrompt, setFinalPrompt] = useState("");
 
     const steps = [
         {
-            label: "What’s your goal?",
+            label: "🎯 What’s your goal?",
             content: (
                 <input
                     id="goal"
@@ -23,50 +27,88 @@ const PromptWizard = () => {
             ),
         },
         {
-            label: "What platform is this for?",
+            label: "📚 What’s the context?",
             content: (
-                <select
-                    id="platform"
-                    className="w-full border p-2 rounded"
-                    value={platform}
-                    onChange={(e) => setPlatform(e.target.value)}
-                >
-                    <option value="">-- Select --</option>
-                    <option value="ChatGPT">ChatGPT</option>
-                    <option value="Midjourney">Midjourney</option>
-                    <option value="Custom API">Custom API</option>
-                </select>
+                <textarea
+                    id="context"
+                    className="w-full border p-2 rounded resize-y"
+                    placeholder="E.g., This is for my work presentation"
+                    value={context}
+                    onChange={(e) => setContext(e.target.value)}
+                />
             ),
         },
         {
-            label: "Preferred tone?",
+            label: "👥 Who is the audience?",
+            content: (
+                <input
+                    id="audience"
+                    className="w-full border p-2 rounded"
+                    placeholder="E.g., For internal team"
+                    value={audience}
+                    onChange={(e) => setAudience(e.target.value)}
+                />
+            ),
+        },
+        {
+            label: "📐 What format do you want?",
+            content: (
+                <input
+                    id="format"
+                    className="w-full border p-2 rounded"
+                    placeholder="E.g., Bullet list, Summary, Table"
+                    value={format}
+                    onChange={(e) => setFormat(e.target.value)}
+                />
+            ),
+        },
+        {
+            label: "⏱ Any constraints?",
+            content: (
+                <textarea
+                    id="constraints"
+                    className="w-full border p-2 rounded resize-y"
+                    placeholder="E.g., Keep it under 100 words, avoid jargon"
+                    value={constraints}
+                    onChange={(e) => setConstraints(e.target.value)}
+                />
+            ),
+        },
+        {
+            label: "🗣 What tone should it use?",
             content: (
                 <input
                     id="tone"
                     className="w-full border p-2 rounded"
-                    placeholder="E.g., Professional, Casual"
+                    placeholder="E.g., Friendly, Professional, Playful"
                     value={tone}
                     onChange={(e) => setTone(e.target.value)}
                 />
             ),
         },
         {
-            label: "Any must-have constraints?",
+            label: "🧪 Any examples?",
             content: (
                 <textarea
-                    id="constraints"
+                    id="example"
                     className="w-full border p-2 rounded resize-y"
-                    placeholder="E.g., Include specific keywords"
-                    value={constraints}
-                    onChange={(e) => setConstraints(e.target.value)}
+                    placeholder="E.g., I want an answer like: 'Here are 5 bullet points...'"
+                    value={example}
+                    onChange={(e) => setExample(e.target.value)}
                 />
             ),
         },
     ];
 
     const generatePrompt = () => {
-        const prompt = `Please write a prompt for an AI assistant to ${goal}, targeting ${platform}, with a ${tone} tone. ${constraints ? "Make sure to: " + constraints : ""
-            }`;
+        const prompt = `I need help with the following task: ${goal}.
+${context ? `Context: ${context}` : ""}
+${audience ? `Audience: ${audience}` : ""}
+${format ? `Preferred format: ${format}` : ""}
+${constraints ? `Constraints: ${constraints}` : ""}
+${tone ? `Tone: ${tone}` : ""}
+${example ? `Example of expected output: ${example}` : ""}`.trim();
+
         setFinalPrompt(prompt);
     };
 
@@ -85,7 +127,7 @@ const PromptWizard = () => {
     };
 
     return (
-        <div className="max-w-xl mx-auto p-6 space-y-6 bg-white shadow rounded">
+        <PromptSectionWrapper>
             <div>
                 <h2 className="text-lg font-semibold mb-2">{steps[step].label}</h2>
                 {steps[step].content}
@@ -107,7 +149,7 @@ const PromptWizard = () => {
                 </button>
             </div>
             {finalPrompt && (<PromptManager initialPrompt={finalPrompt} />)}
-        </div>
+        </PromptSectionWrapper>
     );
 };
 

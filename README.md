@@ -39,13 +39,13 @@
 * Initial setup: `React + Vite + Tailwind + Express + TypeScript`
 * Routing with layout and per-page components
 * First tool: **Prompt Optimizer**
+    * Interactive prompt building 
+    * Prompt variation via `temperature`, `top_p`, `variationId`
 
 #### 🔄 In Progress
 
-* Prompt variation via `temperature`, `top_p`, `variationId`
 * Feedback (👍/👎) collection
 * Compare before vs after
-* Interactive prompt building
 
 #### 🔜 Coming Soon
 
@@ -69,14 +69,21 @@
 
 ### 📦 Project Structure
 
-```bash
-src/
-├── components/       # Reusable UI components (Button, Input, Output)
-├── layout/           # Header, Footer, and Layout
-├── pages/            # Feature entry points (PromptOptimizer, etc.)
-├── services/         # Backend API wrappers (e.g., promptService.ts)
-└── App.tsx           # Router with layout-aware routes
-```
+This section outlines the directory structure of the project for easier navigation and understanding.
+
+#### Frontend (`frontend/src/`)
+
+├── components/       # Reusable UI components (Button, Input, Output) styled with TailwindCSS  
+├── layout/           # Header, Footer, and Layout  
+├── pages/            # Feature entry points (PromptOptimizer, etc.) using React Router v6  
+├── services/         # Backend API wrappers with error handling and caching (e.g., promptService.ts)  
+└── App.tsx           # Router with layout-aware routes  
+
+#### Backend (`backend/src`)
+
+├── routes/           # API route definitions  
+├── services/         # Business logic and integrations (e.g., AI provider SDKs)  
+├── index.ts          # Express app setup and middleware  
 
 ---
 

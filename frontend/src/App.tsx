@@ -8,14 +8,12 @@ import PromptOptimizer from "./pages/PromptOptimizer";
 const App = () => {
     return (
         <Router>
-            <Layout>
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/about" element={<AboutPage />} />
                     <Route path="/prompt-optimizer" element={<PromptOptimizer />} />
                     <Route path="*" element={<NotFoundPage />} />
                 </Routes>
-            </Layout>
         </Router>
     );
 };
