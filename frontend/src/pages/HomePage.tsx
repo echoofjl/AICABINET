@@ -1,9 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
+import { BarChart2, Pencil, Share2, Sparkles } from "lucide-react";
 import { Button } from "../components/ui/Button";
 import { Card, CardContent } from "../components/ui/Card";
-import { Sparkles, Pencil, BarChart2, Share2 } from "lucide-react";
 
 const features = [
   {
@@ -14,16 +14,18 @@ const features = [
     path: "/prompt-optimizer",
   },
   {
-    title: "Text Refiner",
-    description: "Improve and polish your AI-generated text.",
-    icon: <Sparkles className="w-6 h-6 text-blue-600" />,
-    action: "Refine",
-  },
-  {
     title: "Prompt Score",
     description: "Measure the effectiveness of your prompts.",
     icon: <BarChart2 className="w-6 h-6 text-blue-600" />,
     action: "Score Now",
+    path: "/prompt-score",
+  },
+  {
+    title: "Text Refiner",
+    description: "Improve and polish your AI-generated text.",
+    icon: <Sparkles className="w-6 h-6 text-blue-600" />,
+    action: "Refine",
+    path: "/text-refiner",
   },
   {
     title: "AI Assistant Connector",
@@ -49,12 +51,14 @@ const HomePage: React.FC = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
         {features.map(({ title, description, icon, action, path }) => (
-          <Card key={title} className="bg-white text-center shadow-sm border hover:shadow-md transition rounded-xl">
-            <CardContent className="p-6 flex flex-col items-center space-y-4">
+          <Card key={title} >
+            <CardContent>
               {icon}
-              <h3 className="font-semibold text-lg">{title}</h3>
-              <p className="text-sm text-gray-600">{description}</p>
-              <Button className="w-full text-sm py-2" onClick={() => handleClick(path || "/")}>{action}</Button>
+              <div className="flex-grow">
+                <h3 className="font-semibold text-lg">{title}</h3>
+                <p className="text-sm text-gray-600">{description}</p>
+              </div>
+              <Button onClick={() => handleClick(path || "/")}>{action}</Button>
             </CardContent>
           </Card>
         ))}

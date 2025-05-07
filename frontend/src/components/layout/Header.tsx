@@ -7,10 +7,10 @@ const Header: React.FC = () => {
       <div className="max-w-6xl mx-auto flex items-center justify-between">
         <h1 className="text-lg font-semibold">AI Cabinet</h1>
         <nav className="flex gap-6 items-center text-sm">
-          <a href="#" className="hover:text-blue-600">Home</a>
-          <a href="#" className="hover:text-blue-600">Features</a>
-          <a href="#" className="hover:text-blue-600">Pricing</a>
-          <a href="#" className="hover:text-blue-600">Contact</a>
+          <a href="/" className="hover:text-blue-600">Home</a>
+          <a href="/" className="hover:text-blue-600">Features</a>
+          <a href="/" className="hover:text-blue-600">Pricing</a>
+          <a href="/" className="hover:text-blue-600">Contact</a>
           <Button className="ml-4">Sign Up</Button>
         </nav>
       </div>

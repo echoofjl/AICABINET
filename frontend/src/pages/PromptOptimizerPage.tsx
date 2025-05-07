@@ -2,7 +2,7 @@ import { useState } from "react";
 import PromptManager from "../components/ui/PromptManager";
 import PromptWizard from "../components/ui/PromptWizard";
 
-const PromptOptimizer = () => {
+const PromptOptimizerPage = () => {
   const [useWizard, setUseWizard] = useState(false);
 
   return (
@@ -20,4 +20,4 @@ const PromptOptimizer = () => {
   );
 };
 
-export default PromptOptimizer;
+export default PromptOptimizerPage;
