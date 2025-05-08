@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "../components/ui/Button";
+import TextInput from "../components/ui/TextInput";
 
 const PromptScorePage: React.FC = () => {
     const [promptText, setPromptText] = useState("");
@@ -24,16 +25,8 @@ const PromptScorePage: React.FC = () => {
             <h2 className="text-3xl font-bold mb-4">Prompt Score</h2>
             <p className="text-gray-600 mb-6">Evaluate the effectiveness of your AI prompt.</p>
 
-            <textarea
-                className="w-full h-32 p-4 border rounded-md focus:outline-none focus:ring focus:border-blue-600 mb-4"
-                placeholder="Enter your AI prompt here..."
-                value={promptText}
-                onChange={(e) => setPromptText(e.target.value)}
-            ></textarea>
-
-            <Button className="w-full mb-4" onClick={handleScorePrompt}>
-                Score Prompt
-            </Button>
+            <TextInput value={promptText} placeholder="Enter your AI prompt here..." onChange={(e) => setPromptText(e.target.value)} />
+            <Button onClick={handleScorePrompt}>Score Prompt</Button>
 
             {score !== null && (
                 <div className="bg-white p-4 rounded-md border mt-4 text-left shadow-sm">

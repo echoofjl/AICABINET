@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "../components/ui/Button";
+import TextInput from "../components/ui/TextInput";
 
 const TextRefinerPage: React.FC = () => {
     const [inputText, setInputText] = useState("");
@@ -15,16 +16,8 @@ const TextRefinerPage: React.FC = () => {
             <h2 className="text-3xl font-bold mb-4">Text Refiner</h2>
             <p className="text-gray-600 mb-6">Polish and enhance your text with AI.</p>
 
-            <textarea
-                className="w-full h-32 p-4 border rounded-md focus:outline-none focus:ring focus:border-blue-600 mb-4"
-                placeholder="Enter your text here..."
-                value={inputText}
-                onChange={(e) => setInputText(e.target.value)}
-            ></textarea>
-
-            <Button className="w-full mb-4" onClick={handleRefineText}>
-                Refine Text
-            </Button>
+            <TextInput value={inputText} placeholder="Enter your text here..." onChange={(e) => setInputText(e.target.value)} />
+            <Button onClick={handleRefineText}>Refine Text</Button>
 
             {refinedText && (
                 <div className="bg-white p-4 rounded-md border mt-4 text-left shadow-sm">
